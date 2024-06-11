@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">
+                    Talabalar /
+                </span>
+                Test natijalari
+            </h4>
+            <!-- Bordered Table -->
+            <div class="card">
+                <h5 class="card-header">
+                    Barcha testlar
+                </h5>
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Talaba F.I.O.
+                                </th>
+                                <th>
+                                    Guruh
+                                </th>
+                                <th>
+                                    Natija
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for result in result_tests %}
+                                <tr>
+                                    <td>
+                                        {{ result.id }}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'main:test' result.student.id %}">
+                                            {{ result.student.full_name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ result.group.name }}
+                                    </td>
+                                    <td>
+                                        {{ result.result }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--/ Bordered Table -->
+            <hr class="my-5"/>
+        </div>
+        <!-- / Content -->
+    </div>
+
+{% endblock %}
