@@ -191,14 +191,29 @@
 
 
                 <!-- Misc -->
-                <li class="menu-header small text-uppercase"><span class="menu-header-text">Imtihon</span></li>
+                <!-- Misc -->
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">Natijalar</span>
+                </li>
+                <!-- Forms -->
                 <li class="menu-item">
-                    <a href="{% url 'main:results' %}" class="menu-link">
-                        <i class="bx bx-check me-1"></i>
-                        <div data-i18n="Support">
-                            Natijalar
-                        </div>
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-detail"></i>
+                        <div data-i18n="Form Elements">Natijalar</div>
                     </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="{% url 'main:results' %}" class="menu-link">
+                                <div data-i18n="Basic Inputs">Barchasi</div>
+                            </a>
+                        </li>
+                        {% for group in groups %}
+                            <li class="menu-item">
+                                <a href="{% url 'main:result' group.id %}" class="menu-link">
+                                    <div data-i18n="Basic Inputs">{{ group.name }}</div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </li>
 
             </ul>

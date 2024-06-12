@@ -87,3 +87,13 @@ def check_exam(request):
 def result_view(request):
     context = get_context(request)
     return render(request, 'main/results.html', context)
+
+
+def result_group(request, group_id):
+    group = Group.objects.get(id=group_id)
+    context = get_context(request)
+    results_group = General.objects.filter(group=group)
+    context['results_group'] = results_group
+    context['group'] = group
+    return render(request, 'main/result_group.html', context)
+

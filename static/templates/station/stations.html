@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">
+                    Stansiyalar /
+                </span>
+            </h4>
+            <!-- Bordered Table -->
+            <div class="card">
+                <h5 class="card-header">
+                    Toshkent Davlat Stomatologiya Instituti
+                </h5>
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th> ID</th>
+                                <th> Stansiya nomi</th>
+                                <th> Harakatlar soni</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for station in stations %}
+                                <tr>
+                                    <td><strong> {{ station.id }} </strong></td>
+                                    <td>
+                                        <a href="{% url 'station:station' station.id %}">
+                                            {{ station.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ station.titles.all|length }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--/ Bordered Table -->
+        </div>
+        <!-- / Content -->
+    </div>
+{% endblock %}

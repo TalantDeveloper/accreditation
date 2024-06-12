@@ -14,4 +14,5 @@ urlpatterns = [
     path('check/', views.check_exam, name='check'),
 
     path('results/', views.result_view, name='results'),
+    path('result/<int:group_id>/', views.result_group, name='result'),
 ]
