@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">
+                    Talabalar /
+                </span>
+                Basic Tables
+            </h4>
+
+            <!-- Bordered Table -->
+            <div class="card">
+                <h5 class="card-header">
+                    Barcha talabalar
+                </h5>
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>
+                                    ID
+                                </th>
+                                
+                                <th>
+                                    F.I.O.
+                                </th>
+                                <th>
+                                    Guruh
+                                </th>
+                                <th>
+                                    Test
+                                </th>
+                                <th>
+                                    Akkreditatsiya
+                                </th>
+                                <th>
+                                    Umumiy ball
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for general in generals %}
+                                    <tr>
+                                        <td>
+                                            {{ general.id }}
+                                        </td>
+                                        <td>
+                                            {{ general.student.full_name }}
+                                        </td>
+                                        <td>
+                                            {{ general.group.name }}
+                                        </td>
+                                        <td>
+                                            {{ general.result_test.result }}
+                                        </td>
+                                        <td>
+                                            {{ general.exam.result }}
+                                        </td>
+                                        <td>
+                                            {{ general.result_sum }}
+                                        </td>
+                                        
+                                    </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--/ Bordered Table -->
+            <hr class="my-5"/>
+        </div>
+        <!-- / Content -->
+    </div>
+{% endblock %}

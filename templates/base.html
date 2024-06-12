@@ -115,7 +115,7 @@
                     <span class="menu-header-text">Talabalar</span>
                 </li>
                 <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="{% url 'student:students' %}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-dock-top"></i>
                         <div data-i18n="Account Settings">Talabalar</div>
                     </a>
@@ -131,9 +131,14 @@
                         <div data-i18n="Account Settings">Stansiyalar</div>
                     </a>
                     <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="{% url 'station:stations' %}" class="menu-link">
+                                <div data-i18n="Account">Barchasi</div>
+                            </a>
+                        </li>
                         {% for station in stations %}
                             <li class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="{% url 'station:station' station.id %}" class="menu-link">
                                     <div data-i18n="Account">{{ station.name }}</div>
                                 </a>
                             </li>
@@ -153,13 +158,13 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="#" class="menu-link">
+                            <a href="{% url 'student:groups' %}" class="menu-link">
                                 <div data-i18n="Basic Inputs">Barchasi</div>
                             </a>
                         </li>
                         {% for group in groups %}
                             <li class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="{% url 'student:group' group.id %}" class="menu-link">
                                     <div data-i18n="Basic Inputs">{{ group.name }}</div>
                                 </a>
                             </li>
@@ -177,7 +182,7 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="#" class="menu-link">
+                            <a href="{% url 'main:tests' %}" class="menu-link">
                                 <div data-i18n="Basic Inputs">Barchasi</div>
                             </a>
                         </li>
@@ -186,25 +191,16 @@
 
 
                 <!-- Misc -->
-                <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">Imtihon</span></li>
                 <li class="menu-item">
-                    <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank"
-                       class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-support"></i>
+                    <a href="{% url 'main:results' %}" class="menu-link">
+                        <i class="bx bx-check me-1"></i>
                         <div data-i18n="Support">
-                            Support
+                            Natijalar
                         </div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                       target="_blank" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-file"></i>
-                        <div data-i18n="Documentation">
-                            Documentation
-                        </div>
-                    </a>
-                </li>
+
             </ul>
         </aside>
         <!-- / Menu -->

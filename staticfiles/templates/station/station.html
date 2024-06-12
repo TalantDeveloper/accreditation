@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">
+                    Stansiyadan o'tishda akkreditatsiya qilinayotgan shaxsning xarakatlarini baholash maqsadida foydalaniladi /
+                    {{ station.name }}
+                </span>
+            </h4>
+            <!-- Bordered Table -->
+            <div class="card">
+                <h5 class="card-header">
+                    {{ station.name }} bo'yicha Akkreditatsiya qilayotgan shaxsning xarakati
+                </h5>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th> ID </th>
+                                <th> Stansiya </th>
+                                <th> Xarakatlar </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for title in station.titles.all %}
+                                    <tr>
+                                        <td> <strong> {{ title.id }} </strong> </td>
+                                        <td> {{ station.name }} </td>
+                                        <td> {{ title.title }} </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--/ Bordered Table -->
+        </div>
+        <!-- / Content -->
+    </div>
+
+{% endblock %}

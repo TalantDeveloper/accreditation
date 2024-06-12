@@ -22,7 +22,6 @@ def get_context(request):
         'result_tests': result_tests,
         'generals': generals,
     }
-
     return context
 
 

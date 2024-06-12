@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
-from main.function import get_context
-from main.models import ResultTest
+from main.function import get_context, get_result_test
+from main.models import ResultTest, Result, Exam, General
 from station.models import Station
 from student.functions import get_group
 from student.models import Student, Group
@@ -20,21 +20,18 @@ def result_tests_view(request):
     return render(request, 'test/tests.html', context)
 
 
-def result_test_view(request, student_id):
-    context = get_context(request)
-    student = Student.objects.get(pk=student_id)
-    group = get_group(request, student)
-
-    result_test = ResultTest.objects.get(student=student) or None
-    if result_test:
-        context['student'] = student
-        context['group'] = group
-        context['result_test'] = result_test
-        return redirect('main:tests')
-    else:
-        context['student'] = student
-        context['group'] = group
-    return render(request, 'test/test.html', context)
+# def result_test_view(request):
+#     context = get_context(request)
+#     students = context['students']
+#     student_list = []
+#     result_tests = context['result_tests']
+#     for student in students:
+#         result_test = ResultTest.objects.get(student=student)
+#         if result_test is None:
+#             student_list.append(student)
+#
+#     context['student_list'] = student_list
+#     return render(request, 'test/test.html', context)
 
 
 def exam_view(request):
@@ -46,3 +43,37 @@ def exam_view(request):
         context['station'] = station
         return render(request, 'main/exam.html', context)
     return render(request, 'main/exam.html', context)
+
+
+def check_exam(request):
+    context = get_context(request)
+    station = Station.objects.get(id=request.POST.get('station'))
+    student = Student.objects.get(id=request.POST.get('student'))
+    group = get_group(request, student)
+    result_test = get_result_test(student)
+
+    if request.method == 'POST':
+        k = 0
+        print(request.POST.get('1'))
+        for title in station.titles.all():
+            result = Result.objects.create(title=title, student=student, station=station)
+            if request.POST.get(str(title.id)) == 'on':
+                k += 1
+                result.result = True
+            else:
+                result.result = False
+            result.save()
+        result_exam = float((k/station.titles.count())*100)
+        print(result_exam)
+        exam = Exam.objects.create(student=student, group=group, station=station, result=result_exam)
+        exam.save()
+        general = General.objects.create(student=student, group=group, exam=exam, result_test=result_test)
+        general.result_sum = (exam.result + result_test.result) / 2
+        general.save()
+        return redirect('student:groups')
+    return render(request, 'main/exam.html', context)
+
+
+def result_view(request):
+    context = get_context(request)
+    return render(request, 'main/results.html', context)
