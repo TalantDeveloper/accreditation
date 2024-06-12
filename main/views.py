@@ -9,6 +9,16 @@ from student.models import Student, Group
 
 def welcome(request):
     context = get_context(request)
+    generals = context['generals']
+    hour_pirsent = [student for student in generals if student.student == 100.0]
+    eyti_pirsent = [student for student in generals if student.result_sum > 85 and student.result_sum < 100.0]
+    six_pirsent = [student for student in generals if student.exam.result > 60 and student.exam.result < 85.1]
+    pass_pirsent = [student for student in generals if student.exam.result < 60.0]
+
+    context['hour_pirsent'] = hour_pirsent
+    context['eyti_pirsent'] = eyti_pirsent
+    context['six_pirsent'] = six_pirsent
+    context['pass_pirsent'] = pass_pirsent
     return render(request, 'main/welcome.html', context)
 
 
