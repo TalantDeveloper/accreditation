@@ -1,12 +1,20 @@
 from django.shortcuts import render, redirect
 
-from main.function import get_context, get_result_test
+from main.function import get_context, get_result_test, login_function
 from main.models import ResultTest, Result, Exam, General
 from station.models import Station
 from student.functions import get_group
 from student.models import Student, Group
+from django.contrib.auth.decorators import login_required
 
 
+def login_view(request):
+    if request.method == 'POST':
+        return login_function(request)
+    return render(request, 'main/login.html')
+
+
+@login_required
 def welcome(request):
     context = get_context(request)
     generals = context['generals']
@@ -22,6 +30,7 @@ def welcome(request):
     return render(request, 'main/welcome.html', context)
 
 
+@login_required
 def result_tests_view(request):
     context = get_context(request)
     if request.method == 'POST':
@@ -44,6 +53,7 @@ def result_tests_view(request):
 #     return render(request, 'test/test.html', context)
 
 
+@login_required
 def exam_view(request):
     context = get_context(request)
     if request.method == 'POST':
@@ -55,6 +65,7 @@ def exam_view(request):
     return render(request, 'main/exam.html', context)
 
 
+@login_required
 def check_exam(request):
     context = get_context(request)
     station = Station.objects.get(id=request.POST.get('station'))
@@ -84,11 +95,13 @@ def check_exam(request):
     return render(request, 'main/exam.html', context)
 
 
+@login_required
 def result_view(request):
     context = get_context(request)
     return render(request, 'main/results.html', context)
 
 
+@login_required
 def result_group(request, group_id):
     group = Group.objects.get(id=group_id)
     context = get_context(request)
@@ -97,3 +110,6 @@ def result_group(request, group_id):
     context['group'] = group
     return render(request, 'main/result_group.html', context)
 
+
+def not_page(request):
+    return render(request, 'main/login.html')

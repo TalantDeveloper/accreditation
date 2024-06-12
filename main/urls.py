@@ -6,6 +6,7 @@ app_name = 'main'
 
 urlpatterns = [
     path('', views.welcome, name='welcome'),
+    path('login/', views.login_view, name='login'),
 
     path('tests/', views.result_tests_view, name='tests'),
     # path('test/', views.result_test_view, name='test'),
@@ -15,4 +16,5 @@ urlpatterns = [
 
     path('results/', views.result_view, name='results'),
     path('result/<int:group_id>/', views.result_group, name='result'),
+
 ]

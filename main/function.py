@@ -1,3 +1,6 @@
+from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect
+
 from .models import *
 from student.models import *
 from station.models import *
@@ -48,3 +51,14 @@ def get_general(student):
             return general
 
     return None
+
+
+def login_function(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('main:welcome')
+    else:
+        return redirect('main:login')

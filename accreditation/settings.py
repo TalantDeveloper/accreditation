@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-fvzz^-m&70+a4e7n35xi^_+gwl9#f5g#sjhy=0!s&*pf4o+)an
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'exam.tsdi.uz']
 
 
 # Application definition
@@ -53,6 +53,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'accreditation.urls'
+
+LOGIN_URL = 'main:login'
+LOGIN_REDIRECT_URL = 'main:welcome'
+LOGOUT_REDIRECT_URL = "main:login"
 
 TEMPLATES = [
     {
