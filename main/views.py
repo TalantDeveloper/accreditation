@@ -88,6 +88,10 @@ def check_exam(request):
         print(result_exam)
         exam = Exam.objects.create(student=student, group=group, station=station, result=result_exam)
         exam.save()
+
+        if result_test is None:
+            result_test = ResultTest.objects.create(student=student, group=group, result=0.0)
+            result_test.save()
         general = General.objects.create(student=student, group=group, exam=exam, result_test=result_test)
         general.result_sum = (exam.result + result_test.result) / 2
         general.save()
@@ -113,3 +117,15 @@ def result_group(request, group_id):
 
 def not_page(request):
     return render(request, 'main/login.html')
+
+
+def create_student(request):
+    with open('.//static/student.txt', 'r') as f:
+        text = f.readlines()
+        students = []
+        for line in text:
+            line = line.split('=')
+            name = line[1]
+            student = Student.objects.create(full_name=name)
+            student.save()
+    return render(request, 'student/create.html', {'students': students})
