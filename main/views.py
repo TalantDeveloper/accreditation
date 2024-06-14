@@ -122,10 +122,8 @@ def not_page(request):
 def create_student(request):
     with open('.//static/student.txt', 'r') as f:
         text = f.readlines()
-        students = []
         for line in text:
-            line = line.split('=')
-            name = line[1]
-            student = Student.objects.create(full_name=name)
+            line = line.split('=')[1]
+            student = Student.objects.create(full_name=line)
             student.save()
-    return render(request, 'student/create.html', {'students': students})
+    return render(request, 'student/create.html')
