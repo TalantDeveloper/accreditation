@@ -123,7 +123,6 @@ def create_student(request):
     with open('.//static/student.txt', 'r') as f:
         text = f.readlines()
         for line in text:
-            line = line.split('=')[1]
-            student = Student.objects.create(full_name=line)
-            student.save()
+            group = Group.objects.create(name=line)
+            group.save()
     return render(request, 'student/create.html')
