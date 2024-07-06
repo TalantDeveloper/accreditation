@@ -16,6 +16,7 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
+    @property
     def get_students(self):
         students = [student.full_name for student in self.students.all()]
         return students
